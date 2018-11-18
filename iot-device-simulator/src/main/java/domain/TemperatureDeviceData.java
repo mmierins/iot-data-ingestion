@@ -11,6 +11,13 @@ public class TemperatureDeviceData {
         return deviceId;
     }
 
+    public TemperatureDeviceData(String deviceId, GeoLocation location, int temperature, long time) {
+        this.deviceId = deviceId;
+        this.location = location;
+        this.temperature = temperature;
+        this.time = time;
+    }
+
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }

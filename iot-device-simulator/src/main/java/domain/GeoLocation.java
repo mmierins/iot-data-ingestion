@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Random;
+import static util.Utils.getRandomIntegerInRange;
 
 public class GeoLocation {
 
@@ -30,10 +30,6 @@ public class GeoLocation {
 
     public static GeoLocation randomLocation() {
         return new GeoLocation(getRandomIntegerInRange(-90,90), getRandomIntegerInRange(-180,180));
-    }
-
-    private static int getRandomIntegerInRange(int min, int max) {
-        return new Random().ints(min, (max+1)).findFirst().getAsInt();
     }
 
 }
