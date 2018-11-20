@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceSchemaCreatedEvent;
 import org.springframework.context.annotation.Scope;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -19,7 +18,6 @@ import stats.KafkaStats;
 
 import java.time.Instant;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import static util.Utils.getRandomIntegerInRange;
 
@@ -49,10 +47,13 @@ public class TemperatureDeviceSimulator {
         if (!isInit) {
             deviceId = UUID.randomUUID().toString();
             location = GeoLocation.randomLocation();
+
+            log.info("Created simulated temperature device {}", this);
             isInit = true;
         }
 
-        TemperatureDeviceData data = new TemperatureDeviceData(deviceId, location, getRandomIntegerInRange(-100, 100), Instant.now().toEpochMilli());
+
+        TemperatureDeviceData data = new TemperatureDeviceData(deviceId, location, getRandomIntegerInRange(-100, 100), Instant.now().toEpochMilli() / 1000);
         dataEnvelope = new DataEnvelope(data);
 
         kafkaStats.incrementAttempt();
@@ -89,4 +90,11 @@ public class TemperatureDeviceSimulator {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    @Override
+    public String toString() {
+        return "TemperatureDeviceSimulator{" +
+                "deviceId='" + deviceId + '\'' +
+                ", location=" + location +
+                '}';
+    }
 }

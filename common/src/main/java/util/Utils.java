@@ -23,4 +23,8 @@ public class Utils {
         return new Random().ints(min, (max+1)).findFirst().getAsInt();
     }
 
+    public static double getRandomDoubleInRange(int min, int max) {
+        return new Random().doubles(min, (max+1)).findFirst().getAsDouble();
+    }
+
 }

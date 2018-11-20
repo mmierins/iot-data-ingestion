@@ -52,7 +52,7 @@ public class SimulatorAppConfig {
     public SchedulingConfigurer schedulingConfigurerConfiguration() {
         return taskRegistrar -> {
             ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-            taskScheduler.setPoolSize(30);
+            taskScheduler.setPoolSize(10);
             taskScheduler.initialize();
             taskRegistrar.setTaskScheduler(taskScheduler);
         };

@@ -35,7 +35,7 @@ public class SimulatorApp implements CommandLineRunner {
 
     @Scheduled(fixedRate = 5000)
     public void printStats() {
-        log.info("Kafka statistics: messages succeeded: {}, failed: {}", kafkaStats.getSuccess(), kafkaStats.getFailure());
+        log.info("Kafka statistics: messages attempted: {}, succeeded: {}, failed: {}", kafkaStats.getAttempt(), kafkaStats.getSuccess(), kafkaStats.getFailure());
     }
 
     private void initialize() {
